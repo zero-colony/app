@@ -1,12 +1,10 @@
 import type { QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   createRootRouteWithContext,
   HeadContent,
   Outlet,
   Scripts,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { TRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import { useEffect } from "react";
 import appCss from "~/lib/styles/app.css?url";
@@ -16,6 +14,7 @@ export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
   trpc: TRPCOptionsProxy<TRPCRouter>;
 }>()({
+  ssr: false,
   head: () => ({
     meta: [
       {
@@ -63,8 +62,8 @@ function RootDocument({ children }: { readonly children: React.ReactNode }) {
       <body>
         {children}
 
-        {isDev && <ReactQueryDevtools buttonPosition="bottom-left" />}
-        {isDev && <TanStackRouterDevtools position="bottom-right" />}
+        {/* {isDev && <ReactQueryDevtools buttonPosition="bottom-left" />}
+        {isDev && <TanStackRouterDevtools position="bottom-right" />} */}
 
         <Scripts />
       </body>
