@@ -5,7 +5,6 @@ import { pages, setCurrentPage } from "../lib/state/pages";
 import SidebarContent from "./SidebarContent";
 import {
   AvatarIcon,
-  ChatIcon,
   DiscordIcon,
   GithubIcon,
   HomeIcon,
@@ -31,7 +30,6 @@ const Sidebar: React.FC = () => {
     { id: "home", icon: HomeIcon, activeColor: "#FF2E58" },
     { id: "leaderboard", icon: LeaderboardIcon, activeColor: "#FF2E58" },
     { id: "avatar", icon: AvatarIcon, activeColor: "#FF2E58" },
-    { id: "chat", icon: ChatIcon, activeColor: "#FF2E58" },
   ];
 
   const socialItems = [
@@ -65,7 +63,7 @@ const Sidebar: React.FC = () => {
               <button
                 key={item.id}
                 onClick={() => setCurrentPage(item.id)}
-                className="group relative h-6 w-6"
+                className="group relative h-6 w-6 cursor-pointer"
               >
                 <item.icon
                   color={current === item.id ? item.activeColor : "#838383"}
@@ -87,7 +85,7 @@ const Sidebar: React.FC = () => {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="h-6 w-6 opacity-70 transition-opacity duration-200 hover:opacity-100"
+              className="h-6 w-6 cursor-pointer opacity-70 transition-opacity duration-200 hover:opacity-100"
             >
               <item.icon color="#838383" size={24} />
             </a>

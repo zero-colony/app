@@ -7,4 +7,9 @@
 
 @theme {
   --font-sans: "Montserrat", sans-serif;
+  --color-primary: #ff2e58;
+}
+
+:root {
+  @apply antialiased;
 }

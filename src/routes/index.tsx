@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MarsGlobe } from "~/components/Mars";
 import Sidebar from "~/components/Sidebar";
-
+import { Wallet } from "~/components/Wallet";
 export const Route = createFileRoute("/")({
   component: Home,
 });
@@ -18,6 +18,8 @@ function Home() {
         handleClaim={() => Promise.resolve()}
         currency="ETH"
       />
+
+      <Wallet />
     </div>
   );
 }
