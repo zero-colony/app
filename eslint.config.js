@@ -51,6 +51,7 @@ export default tseslint.config(
   },
   {
     rules: {
+      "@eslint-react/dom/no-missing-button-type": "off",
       // You can override any rules here
       // "@eslint-react/prefer-read-only-props": "off",
       // "@eslint-react/no-forward-ref": "off",

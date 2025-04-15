@@ -152,6 +152,7 @@ export const initView = (
     url: "https://astro.arcgis.com/arcgis/rest/services/OnMars/MDIM/MapServer",
     title: "Imagery",
     copyright: "USGS Astrogeology Science Center, NASA, JPL, Esri",
+    effect: "brightness(5) hue-rotate(270deg) contrast(200%)",
   });
 
   const marsElevation = new ElevationLayer({
@@ -164,6 +165,7 @@ export const initView = (
     url: "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Mars_Nomenclature_Mountains/FeatureServer",
     definitionExpression: "type = 'Crater, craters'",
     title: "Craters",
+    effect: "brightness(5) hue-rotate(270deg) contrast(200%)",
     renderer: {
       // @ts-ignore
       type: "simple",
@@ -263,7 +265,6 @@ export const initView = (
   map.add(tokenLayer);
   map.add(hoverLayer);
   map.add(cratersLayer);
-
   const view = new SceneView({
     map: map,
     container: "viewDiv",
@@ -280,19 +281,26 @@ export const initView = (
       tilt: 12.3,
     },
     environment: {
+      starsEnabled: true,
+      background: {
+        type: "color",
+        color: [0, 0, 0, 1],
+      },
       lighting: {
+        type: "virtual",
         directShadowsEnabled: false,
-        ambientOcclusionEnabled: false,
-        // cameraTrackingEnabled: false,
       },
     },
   });
-  // @ts-ignore
+  // @ts-expect-error description
   window.view = view;
   view.on("pointer-move", (evt) => {
     const point = view.toMap({ x: evt.x, y: evt.y }) ?? {};
 
-    const { latitude, longitude } = point;
+    const { latitude, longitude } = point as unknown as {
+      latitude: number;
+      longitude: number;
+    };
 
     const token = toTokenNumber(latitude, longitude);
     setCurToken(token === null ? null : token.toString());

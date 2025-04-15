@@ -2,17 +2,8 @@ import Graphic from "@arcgis/core/Graphic";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import PolygonSymbol3D from "@arcgis/core/symbols/PolygonSymbol3D";
 import SceneView from "@arcgis/core/views/SceneView";
-import {
-  arrow,
-  autoUpdate,
-  flip,
-  FloatingArrow,
-  offset,
-  shift,
-  useFloating,
-} from "@floating-ui/react";
+import { arrow, autoUpdate, flip, offset, shift, useFloating } from "@floating-ui/react";
 import { NETWORK_DATA } from "~/lib/constants";
-import { cn } from "~/lib/utils";
 import {
   initView,
   parseTokenNumber,
@@ -22,11 +13,9 @@ import {
   toTokenNumber,
 } from "~/lib/utils/globe";
 
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { parseEther } from "viem";
-
-import { generateBlockie } from "~/lib/utils";
 
 interface Props {
   allTokens: string[] | null;
@@ -47,14 +36,15 @@ export const MarsGlobe = ({
   currency,
   handleClaim,
 }: Props) => {
-  const [curToken, setCurToken] = React.useState<string | null>(null);
-  const tokenRef = React.useRef<string | null>(null);
-  const hoverLayer = React.useRef<GraphicsLayer>(null);
-  const view = React.useRef<SceneView | null>(null);
-  const tokensLayer = React.useRef<GraphicsLayer | null>(null);
-  const arrowRef = React.useRef(null);
+  const tokenRef = useRef<string | null>(null);
+  const hoverLayer = useRef<GraphicsLayer>(null);
+  const view = useRef<SceneView | null>(null);
+  const tokensLayer = useRef<GraphicsLayer | null>(null);
+  const arrowRef = useRef(null);
 
   const address = "";
+
+  console.log("rerendering");
 
   // Tooltip state
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
@@ -117,6 +107,11 @@ export const MarsGlobe = ({
 
       const token = toTokenNumber(latitude, longitude) as number;
 
+      // If clicking on the same token that's already open, keep the tooltip open
+      if (tooltipData?.token === token && isTooltipOpen) {
+        return;
+      }
+
       setTooltipData({
         longitudes: [longitude, longitude + 1],
         latitudes: [latitude, latitude + 1],
@@ -155,48 +150,82 @@ export const MarsGlobe = ({
         setIsTooltipOpen(false);
       }
     });
+  }, [tooltipData, isTooltipOpen]);
+
+  const lastTokenRef = useRef<string | null>(null);
+
+  const createPolygon = useCallback((x: number, y: number) => {
+    const latitudes: [number, number] = [toLat(y), toLat(y + 1)];
+    const longitudes: [number, number] = [toLong(x), toLong(x + 1)];
+
+    return {
+      type: "polygon",
+      rings: [
+        [longitudes[0], latitudes[0]],
+        [longitudes[0], latitudes[1]],
+        [longitudes[1], latitudes[1]],
+        [longitudes[1], latitudes[0]],
+      ],
+      spatialReference: { wkid: 104971 },
+    };
   }, []);
 
-  useEffect(() => {
-    if (myTokens === null || allTokens === null) return;
+  const getSymbolForToken = useCallback(
+    (token: string) => {
+      return !allTokens?.includes(token)
+        ? simpleFillSymbol([33, 222, 33, 0.5]) // Green
+        : simpleFillSymbol([200, 0, 0, 0.6]); // Red
+    },
+    [allTokens],
+  );
+
+  const createGraphicForToken = useCallback(
+    (token: string) => {
+      const { x, y } = parseTokenNumber(token) ?? {};
+      if (x === undefined || y === undefined) return null;
+
+      const polygon = createPolygon(x, y);
+      const symbol = getSymbolForToken(token);
+
+      return new Graphic({
+        // @ts-expect-error some types
+        geometry: polygon,
+        symbol: symbol,
+      });
+    },
+    [createPolygon, getSymbolForToken],
+  );
+
+  const updateHoverLayer = useCallback(() => {
     if (!hoverLayer.current) return;
-    hoverLayer.current.removeAll();
-    console.log("curToken", curToken);
 
-    if (curToken !== null) {
-      const { x, y } = parseTokenNumber(curToken) ?? {};
-      if (x !== undefined && y !== undefined) {
-        const latitudes: [number, number] = [toLat(y), toLat(y + 1)];
-        const longitudes: [number, number] = [toLong(x), toLong(x + 1)];
+    const curToken = tokenRef.current;
 
-        const polygon = {
-          type: "polygon",
-          rings: [
-            [longitudes[0], latitudes[0]],
-            [longitudes[0], latitudes[1]],
-            [longitudes[1], latitudes[1]],
-            [longitudes[1], latitudes[0]],
-          ],
-          spatialReference: { wkid: 104971 },
-        };
+    if (curToken !== lastTokenRef.current) {
+      lastTokenRef.current = curToken;
+      const firstGraphic = hoverLayer.current.graphics.at(0);
+      if (firstGraphic) {
+        hoverLayer.current.remove(firstGraphic);
+      }
 
-        const simpleFillSymbolHover = !allTokens?.includes(curToken)
-          ? simpleFillSymbol([33, 222, 33, 0.5]) // Green
-          : simpleFillSymbol([200, 0, 0, 0.6]); // Red
-
-        // Hide tooltip when moving or zooming
-
-        const polygonGraphic = new Graphic({
-          // @ts-expect-error some types
-          geometry: polygon,
-          symbol: simpleFillSymbolHover,
-        });
-
-        hoverLayer.current.add(polygonGraphic);
+      if (curToken !== null) {
+        const graphic = createGraphicForToken(curToken);
+        if (graphic) {
+          hoverLayer.current.add(graphic);
+        }
       }
     }
-  }, [curToken, hoverLayer, allTokens, myTokens, currency, address, refs, update]);
+  }, [createGraphicForToken]);
 
+  useEffect(() => {
+    if (myTokens === null || allTokens === null || !hoverLayer.current) return;
+
+    const intervalId = setInterval(updateHoverLayer, 50);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [allTokens, myTokens, updateHoverLayer]);
   useEffect(() => {
     tokensLayer.current?.removeAll();
     // STEP 1 - render a view as soon as possible
@@ -205,7 +234,9 @@ export const MarsGlobe = ({
         tokenLayer: _tl,
         hoverLayer: _hl,
         view: _view,
-      } = initView(tokenRef, setCurToken);
+      } = initView(tokenRef, (token) => {
+        tokenRef.current = token;
+      });
       tokensLayer.current = _tl;
       hoverLayer.current = _hl;
       view.current = _view;
@@ -276,10 +307,9 @@ export const MarsGlobe = ({
   };
 
   return (
-    <>
+    <div className="contrast-[1.1] hue-rotate-[325deg] saturate-[1.75] filter">
       <div id="viewDiv" ref={refs.setReference} />
-
-      {/* Tooltip */}
+      {/* Tooltip
       {isTooltipOpen && tooltipData && (
         <div
           id="floating-tooltip"
@@ -361,7 +391,7 @@ export const MarsGlobe = ({
             </div>
           </div>
         </div>
-      )}
-    </>
+      )} */}
+    </div>
   );
 };
