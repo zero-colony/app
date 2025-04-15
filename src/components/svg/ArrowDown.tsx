@@ -1,0 +1,19 @@
+import React from "react";
+
+const ArrowDown: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    width="17"
+    height="10"
+    viewBox="0 0 17 10"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M8.94982 9.51416L16.7574 1.46282C17.2445 0.96043 16.9492 0 16.3076 0H0.692515C0.0508645 0 -0.244445 0.960429 0.242733 1.46282L8.05026 9.51416C8.30908 9.78106 8.691 9.78106 8.94982 9.51416Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
+export default ArrowDown;

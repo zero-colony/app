@@ -8,8 +8,9 @@
 @theme {
   --font-sans: "Montserrat", sans-serif;
   --color-primary: #ff2e58;
+  --color-selection: #404040;
 }
 
 :root {
-  @apply bg-black text-white antialiased;
+  @apply bg-black text-white antialiased selection:bg-[var(--color-selection)] selection:text-white;
 }

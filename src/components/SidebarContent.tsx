@@ -32,15 +32,22 @@ const SidebarContent: React.FC = () => {
   return (
     <LazyMotion features={domAnimation}>
       <m.div
-        className="h-screen w-screen flex-1 overflow-auto bg-black/80 text-white backdrop-blur-[30px] sm:w-[540px]"
-        initial={isMobile ? {} : { x: -540 }}
-        animate={isMobile ? {} : { x: 0 }}
-        exit={isMobile ? {} : { x: -540 }}
-        transition={isMobile ? {} : { duration: 0.5, type: "spring", bounce: 0 }}
+        className="h-screen w-screen flex-1 overflow-auto border-r border-white/10 bg-black/80 text-white backdrop-blur-[30px] sm:w-[540px]"
+        initial={isMobile ? undefined : { x: -540 }}
+        animate={isMobile ? undefined : { x: 0 }}
+        exit={
+          isMobile
+            ? undefined
+            : { x: -540, transition: { duration: 0.4, type: "spring", bounce: 0 } }
+        }
+        transition={isMobile ? undefined : { duration: 0.5, type: "spring", bounce: 0 }}
       >
         <m.div
-          exit={isMobile ? {} : { filter: "blur(4px)" }}
-          transition={isMobile ? {} : { duration: 0.3, ease: "easeOut" }}
+          exit={
+            isMobile
+              ? undefined
+              : { filter: "blur(1px)", transition: { duration: 0.4, ease: "easeInOut" } }
+          }
           className="flex w-full flex-col"
         >
           <div className="flex w-full justify-between p-5 pb-3.5">
