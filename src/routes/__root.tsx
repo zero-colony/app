@@ -14,7 +14,7 @@ export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
   trpc: TRPCOptionsProxy<TRPCRouter>;
 }>()({
-  ssr: false,
+  ssr: true,
   head: () => ({
     meta: [
       {
@@ -67,7 +67,7 @@ function RootDocument({ children }: { readonly children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body style={{ backgroundColor: "black", color: "white" }}>
         {children}
 
         {/* {isDev && <ReactQueryDevtools buttonPosition="bottom-left" />}

@@ -11,5 +11,5 @@
 }
 
 :root {
-  @apply antialiased;
+  @apply bg-black text-white antialiased;
 }
