@@ -2,6 +2,7 @@ import { X as CloseIcon } from "lucide-react";
 import { LazyMotion, domAnimation } from "motion/react";
 import * as m from "motion/react-m";
 import React from "react";
+import { useMediaQuery } from "usehooks-ts";
 import { useSnapshot } from "valtio";
 import { Page, pages, togglePage } from "../lib/state/pages";
 import Avatar from "./pages/Avatar";
@@ -26,19 +27,20 @@ const PageTitles: Record<Page, string> = {
 const SidebarContent: React.FC = () => {
   const { current } = useSnapshot(pages);
   const CurrentPage = PageComponents[current];
+  const isMobile = useMediaQuery("(max-width: 640px)");
 
   return (
     <LazyMotion features={domAnimation}>
       <m.div
-        className="h-screen w-[540px] flex-1 overflow-auto bg-black/80 text-white backdrop-blur-[30px]"
-        initial={{ x: -540 }}
-        animate={{ x: 0 }}
-        exit={{ x: -540 }}
-        transition={{ duration: 0.5, type: "spring", bounce: 0 }}
+        className="h-screen w-screen flex-1 overflow-auto bg-black/80 text-white backdrop-blur-[30px] sm:w-[540px]"
+        initial={isMobile ? {} : { x: -540 }}
+        animate={isMobile ? {} : { x: 0 }}
+        exit={isMobile ? {} : { x: -540 }}
+        transition={isMobile ? {} : { duration: 0.5, type: "spring", bounce: 0 }}
       >
         <m.div
-          exit={{ filter: "blur(4px)" }}
-          transition={{ duration: 0.5, type: "spring", bounce: 0 }}
+          exit={isMobile ? {} : { filter: "blur(4px)" }}
+          transition={isMobile ? {} : { duration: 0.3, ease: "easeOut" }}
           className="flex w-full flex-col"
         >
           <div className="flex w-full justify-between p-5 pb-3.5">
