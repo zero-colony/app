@@ -8,7 +8,7 @@ import {
 import { TRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import { useEffect } from "react";
 import appCss from "~/lib/styles/app.css?url";
-import { TRPCRouter } from "~/trpc/router";
+import { TRPCRouter } from "~/trpc/init/router";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;

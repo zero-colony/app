@@ -7,8 +7,8 @@ import superjson from "superjson";
 import { DefaultCatchBoundary } from "./components/DefaultCatchBoundary";
 import { NotFound } from "./components/NotFound";
 import { routeTree } from "./routeTree.gen";
-import { TRPCProvider } from "./trpc/react";
-import { TRPCRouter } from "./trpc/router";
+import { TRPCProvider } from "./trpc/init/react";
+import { TRPCRouter } from "./trpc/init/router";
 
 // NOTE: Most of the integration code found here is experimental and will
 // definitely end up in a more streamlined API in the future. This is just
