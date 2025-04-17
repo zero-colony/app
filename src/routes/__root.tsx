@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-router";
 import { TRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import { useEffect } from "react";
+import { Toaster } from "sonner";
 import { Web3Provider } from "~/components/Web3Provider";
 import appCss from "~/lib/styles/app.css?url";
 import { TRPCRouter } from "~/trpc/init/router";
@@ -26,7 +27,7 @@ export const Route = createRootRouteWithContext<{
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "React TanStarter",
+        title: "Zero Colony | NFT-based game",
       },
     ],
     links: [
@@ -48,6 +49,8 @@ function RootComponent() {
       <Web3Provider>
         <Outlet />
       </Web3Provider>
+
+      <Toaster />
     </RootDocument>
   );
 }

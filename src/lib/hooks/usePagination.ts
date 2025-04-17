@@ -1,30 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function usePagination<T>({
   items,
   itemsPerPage = 10,
 }: {
-  items: T[];
+  items: T[] | undefined;
   itemsPerPage?: number;
 }) {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
 
-  const totalItems = items.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const isEmpty = !items || items.length === 0;
+  const totalPages = isEmpty ? 0 : Math.ceil(items.length / itemsPerPage);
 
-  const paginatedItems = items.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
+  const paginatedItems = isEmpty
+    ? []
+    : items.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
-  const isEmpty = totalItems === 0;
+  const handlePageChange = ({ selected }: { selected: number }) => {
+    setCurrentPage(selected);
+  };
+
+  // Reset to first page when items change
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [items]);
 
   return {
     currentPage,
     setCurrentPage,
     paginatedItems,
     totalPages,
-    totalItems,
     isEmpty,
+    handlePageChange,
   };
 }

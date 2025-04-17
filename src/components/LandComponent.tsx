@@ -3,49 +3,40 @@ import * as m from "motion/react-m";
 
 import React, { useState } from "react";
 import useMeasure from "react-use-measure";
+import { formatEther } from "viem";
 import { cn } from "~/lib/utils";
+import { BUILDINGS } from "~/lib/utils/buildings";
 import Building from "./Building";
 import ArrowDown from "./svg/ArrowDown";
 
-const LandComponent: React.FC = () => {
+interface LandDetails {
+  speed: bigint;
+  earned: bigint;
+  baseStation: number;
+  transport: number;
+  robotAssembly: number;
+  powerProduction: number;
+}
+
+interface LandComponentProps {
+  landId: string;
+  landDetails: LandDetails;
+}
+
+const LandComponent: React.FC<LandComponentProps> = ({ landId, landDetails }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const buildings = [
-    {
-      id: 1,
-      title: "Electricity",
-      dailyOutput: "0 CLNY/day",
-      reward: "+2 CLNY/Day",
-      cost: "30 CLNY",
-    },
-    {
-      id: 2,
-      title: "Node",
-      dailyOutput: "0 CLNY/day",
-      reward: "+2 CLNY/Day",
-      isBuilt: true,
-    },
-    {
-      id: 3,
-      title: "Data Center",
-      dailyOutput: "0 CLNY/day",
-      reward: "+2 CLNY/Day",
-      cost: "120 CLNY",
-      level: 1,
-    },
-    {
-      id: 4,
-      title: "AI Lab",
-      dailyOutput: "0 CLNY/day",
-      reward: "+2 CLNY/Day",
-      cost: "120 CLNY",
-      level: 1,
-    },
-  ];
+  const formattedDailyOutput = landDetails?.speed
+    ? `${landDetails.speed} CLNY/day`
+    : "0 CLNY/day";
+
+  const formattedEarnedAmount = landDetails?.earned
+    ? `${Number(formatEther(landDetails.earned)).toFixed(2)} CLNY`
+    : "0 CLNY";
 
   const [ref, bounds] = useMeasure();
 
@@ -67,14 +58,16 @@ const LandComponent: React.FC = () => {
 
             <div className="flex flex-col justify-center gap-1">
               <span className="text-sm font-semibold text-white uppercase">
-                Land #12321
+                Land #{landId}
               </span>
 
               <div className="flex flex-row items-center gap-2">
                 <div className="rounded bg-white/10 px-2 py-1 text-[10px] text-white">
-                  1 CLNY/day
+                  {formattedDailyOutput}
                 </div>
-                <span className="text-[11px] text-[#ADADAD]">Earned: 0.7953 CLNY</span>
+                <span className="text-[11px] text-[#ADADAD]">
+                  Earned: {formattedEarnedAmount}
+                </span>
               </div>
             </div>
           </div>
@@ -82,7 +75,7 @@ const LandComponent: React.FC = () => {
           <div className="flex flex-row items-center">
             <button
               className={cn(
-                "flex h-[40px] w-[100px] flex-row items-center justify-center gap-1.5 rounded-lg px-2.5 py-2.5",
+                "flex h-[40px] w-[100px] cursor-pointer flex-row items-center justify-center gap-1.5 rounded-lg px-2.5 py-2.5",
                 isExpanded
                   ? "text-primary border-primary border bg-transparent"
                   : "bg-[#FF2E58] text-white",
@@ -126,17 +119,14 @@ const LandComponent: React.FC = () => {
               }}
             >
               <div className="flex flex-row gap-px">
-                {buildings.map((building, index) => (
-                  <React.Fragment key={building.id}>
+                {BUILDINGS.map((building, index) => (
+                  <React.Fragment key={building.key}>
                     <Building
-                      title={building.title}
-                      dailyOutput={building.dailyOutput}
-                      reward={building.reward}
-                      cost={building.cost}
-                      isBuilt={building.isBuilt}
-                      level={building.level}
+                      {...building}
+                      currentLevel={landDetails[building.key]}
+                      landId={landId}
                     />
-                    {index < buildings.length - 1 && (
+                    {index < BUILDINGS.length - 1 && (
                       <div className="h-auto w-px bg-white/5"></div>
                     )}
                   </React.Fragment>

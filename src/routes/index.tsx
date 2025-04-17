@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { MarsGlobe } from "~/components/Mars";
 import Sidebar from "~/components/Sidebar";
 import { Wallet } from "~/components/Wallet";
-import { useAllTokens } from "~/lib/web3/hooks";
+import { useAllTokens, useCLNYBalance, useMyLands } from "~/lib/web3/hooks";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -10,6 +10,8 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const { tokens } = useAllTokens();
+  const { myLands } = useMyLands();
+  const { clnyBalanceWei } = useCLNYBalance();
 
   return (
     <div>
@@ -17,8 +19,8 @@ function Home() {
 
       <MarsGlobe
         allTokens={tokens}
-        myTokens={["5"]}
-        balanceInWei={0}
+        myTokens={myLands || []}
+        balanceInWei={clnyBalanceWei ?? 0}
         handleClaim={() => Promise.resolve()}
         currency="ETH"
       />

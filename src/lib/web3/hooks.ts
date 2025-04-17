@@ -4,6 +4,10 @@ import { formatEther } from "viem";
 import { useAccount, useBalance, useReadContract } from "wagmi";
 import { NETWORK_DATA } from "../constants/network-data";
 import { CLNY_CONTRACT, GAME_MANAGER_CONTRACT, MC_CONTRACT } from "./contracts";
+// ~/lib/web3/hooks/useUpgradeBuilding.ts
+import { toast } from "sonner";
+import { useWriteContract } from "wagmi";
+import { BuildingConfig } from "~/lib/utils/buildings";
 
 export const useCLNYBalance = () => {
   const { address } = useAccount();
@@ -116,3 +120,40 @@ export const useLandsDetailsPaginate = (tokens: string[]) => {
     isLoadingLandsDetails: isLoadingLandsDetails,
   };
 };
+
+export function useUpgradeBuilding(
+  landId: string,
+  building: BuildingConfig,
+  currentLevel: number,
+) {
+  const nextLevel = currentLevel + 1;
+
+  const { refetchCLNYBalance } = useCLNYBalance();
+
+  const { writeContract, isPending } = useWriteContract({
+    mutation: {
+      onError(error: Error) {
+        toast.error(error.message);
+      },
+      onSuccess() {
+        toast.success(`${building.title} upgraded to level ${nextLevel}!`);
+        refetchCLNYBalance();
+        // update land stats (find in useQuery state)
+      },
+    },
+  });
+
+  async function upgrade() {
+    const args = building.contract.getArgs(landId, nextLevel);
+    writeContract({
+      ...GAME_MANAGER_CONTRACT,
+      functionName: building.contract.method,
+      args: args as [bigint, number],
+    });
+  }
+
+  return {
+    upgrade,
+    isLoading: isPending,
+  };
+}
