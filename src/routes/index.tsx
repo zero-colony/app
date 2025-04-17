@@ -2,18 +2,21 @@ import { createFileRoute } from "@tanstack/react-router";
 import { MarsGlobe } from "~/components/Mars";
 import Sidebar from "~/components/Sidebar";
 import { Wallet } from "~/components/Wallet";
+import { useAllTokens } from "~/lib/web3/hooks";
 
 export const Route = createFileRoute("/")({
   component: Home,
 });
 
 function Home() {
+  const { tokens } = useAllTokens();
+
   return (
     <div>
       <Sidebar />
 
       <MarsGlobe
-        allTokens={["5", "10"]}
+        allTokens={tokens}
         myTokens={["5"]}
         balanceInWei={0}
         handleClaim={() => Promise.resolve()}

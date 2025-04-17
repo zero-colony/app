@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { formatEther } from "viem";
 import { useAccount, useBalance, useReadContract } from "wagmi";
@@ -54,4 +55,32 @@ export const useEthBalance = () => {
     refetchEthBalance,
     isEthBalanceLoading,
   };
+};
+
+export const useAllTokens = () => {
+  const fetchTokens = async (): Promise<string[]> => {
+    if (NETWORK_DATA.SOLDOUT) {
+      return new Array(21000).fill("").map((_, index) => index.toString());
+    }
+    try {
+      const response = await fetch(NETWORK_DATA.LAND_META);
+      const result = (await response.json()) as string[];
+      return result.map((o) => `${o}`);
+    } catch {
+      return [];
+    }
+  };
+
+  const {
+    data: tokens = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["tokens"],
+    queryFn: fetchTokens,
+  });
+
+  return { tokens, isLoading, isError, error, refetch };
 };

@@ -17,6 +17,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { parseEther } from "viem";
 
+// Colors configuration
+const COLORS = {
+  availableLand: [22, 197, 178, 0.5] as [number, number, number, number],
+  occupiedLand: [255, 100, 0, 0.4] as [number, number, number, number], // Orange for occupied land
+  myLand: [139, 227, 79, 0.4] as [number, number, number, number], // Green for my land
+  tooltipBackground: "rgba(0, 0, 0, 0.75)", // Black with opacity for tooltip
+};
+
 interface Props {
   allTokens: string[] | null;
   myTokens: string[] | null;
@@ -173,8 +181,8 @@ export const MarsGlobe = ({
   const getSymbolForToken = useCallback(
     (token: string) => {
       return !allTokens?.includes(token)
-        ? simpleFillSymbol([33, 222, 33, 0.5]) // Green
-        : simpleFillSymbol([200, 0, 0, 0.6]); // Red
+        ? simpleFillSymbol(COLORS.availableLand) // Green for available
+        : simpleFillSymbol(COLORS.occupiedLand); // Orange for occupied
     },
     [allTokens],
   );
@@ -245,12 +253,12 @@ export const MarsGlobe = ({
     // STEP 2 - render my tokens as soon as we get them
     // STEP 3 - render all other tokens as soon we get them
     if (myTokens !== null && allTokens !== null) {
-      const simpleFillSymbolOrange = simpleFillSymbol([227, 15, 15, 0.5]);
+      const simpleFillSymbolOrange = simpleFillSymbol(COLORS.occupiedLand);
       const simpleFillSymbolGreen = new PolygonSymbol3D({
         symbolLayers: [
           {
             type: "fill",
-            material: { color: [139, 227, 79, 0.4] },
+            material: { color: COLORS.myLand },
           },
         ],
       });
@@ -307,7 +315,7 @@ export const MarsGlobe = ({
   };
 
   return (
-    <div className="contrast-[1.1] hue-rotate-[325deg] saturate-[1.75] filter">
+    <div className="contrast-[1.1] hue-rotate-[325deg] saturate-[1.7] filter">
       <div id="viewDiv" ref={refs.setReference} />
       {/* Tooltip
       {isTooltipOpen && tooltipData && (
@@ -317,7 +325,7 @@ export const MarsGlobe = ({
           ref={refs.setFloating}
           style={floatingStyles}
         >
-          <FloatingArrow ref={arrowRef} context={context} fill="rgba(0, 0, 0, 0.75)" />
+          <FloatingArrow ref={arrowRef} context={context} fill={COLORS.tooltipBackground} />
 
           <button
             className="absolute top-0 right-0 cursor-pointer p-4"
