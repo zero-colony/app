@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-router";
 import { TRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import { useEffect } from "react";
+import { Web3Provider } from "~/components/Web3Provider";
 import appCss from "~/lib/styles/app.css?url";
 import { TRPCRouter } from "~/trpc/init/router";
 
@@ -44,7 +45,9 @@ export const Route = createRootRouteWithContext<{
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <Web3Provider>
+        <Outlet />
+      </Web3Provider>
     </RootDocument>
   );
 }
