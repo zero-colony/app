@@ -19,9 +19,9 @@ import { parseEther } from "viem";
 
 // Colors configuration
 const COLORS = {
-  availableLand: [22, 197, 178, 0.5] as [number, number, number, number],
+  availableLand: [75, 169, 143, 0.5] as [number, number, number, number],
   occupiedLand: [255, 100, 0, 0.4] as [number, number, number, number], // Orange for occupied land
-  myLand: [139, 227, 79, 0.4] as [number, number, number, number], // Green for my land
+  myLand: [95, 158, 131, 0.5] as [number, number, number, number], // Softer green for my land
   tooltipBackground: "rgba(0, 0, 0, 0.75)", // Black with opacity for tooltip
 };
 

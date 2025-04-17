@@ -3,19 +3,7 @@ import { useMemo } from "react";
 import { formatEther } from "viem";
 import { useAccount, useBalance, useReadContract } from "wagmi";
 import { NETWORK_DATA } from "../constants/network-data";
-
-const CLNY_CONTRACT = {
-  address: NETWORK_DATA.CLNY as `0x${string}`,
-  abi: [
-    {
-      name: "balanceOf",
-      type: "function",
-      stateMutability: "view",
-      inputs: [{ name: "account", type: "address" }],
-      outputs: [{ name: "balance", type: "uint256" }],
-    },
-  ],
-};
+import { CLNY_CONTRACT, GAME_MANAGER_CONTRACT, MC_CONTRACT } from "./contracts";
 
 export const useCLNYBalance = () => {
   const { address } = useAccount();
@@ -83,4 +71,48 @@ export const useAllTokens = () => {
   });
 
   return { tokens, isLoading, isError, error, refetch };
+};
+
+export const useMyLands = () => {
+  const { address } = useAccount();
+
+  const {
+    data: myLands,
+    refetch: refetchMyLands,
+    isLoading: isLoadingMyLands,
+  } = useReadContract({
+    ...MC_CONTRACT,
+    functionName: "allMyTokens",
+    account: address as `0x${string}`,
+    query: {
+      select: (data) => {
+        if (!data) return [];
+        return data.map((token) => token.toString());
+      },
+    },
+  });
+
+  const hasNoLands = useMemo(() => {
+    return myLands?.length === 0 || (!myLands && !isLoadingMyLands);
+  }, [myLands, isLoadingMyLands]);
+
+  return {
+    myLands: myLands,
+    refetchMyLands: refetchMyLands,
+    isLoadingMyLands: isLoadingMyLands,
+    hasNoLands: hasNoLands,
+  };
+};
+
+export const useLandsDetailsPaginate = (tokens: string[]) => {
+  const { data: landsDetails, isLoading: isLoadingLandsDetails } = useReadContract({
+    ...GAME_MANAGER_CONTRACT,
+    functionName: "getAttributesMany",
+    args: [tokens.map((token) => BigInt(token))],
+  });
+
+  return {
+    landsDetails: landsDetails,
+    isLoadingLandsDetails: isLoadingLandsDetails,
+  };
 };

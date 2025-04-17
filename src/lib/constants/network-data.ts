@@ -115,4 +115,5 @@ export const contracts = {
   },
 } as const;
 
-export const NETWORK_DATA = contracts["zero"];
+export const NETWORK_DATA =
+  contracts[import.meta.env.VITE_NETWORK as "zero" | "zero-testnet"] || contracts["zero"];
