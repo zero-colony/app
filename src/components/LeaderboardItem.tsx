@@ -1,6 +1,6 @@
 interface LeaderboardItemProps {
   position: number;
-  username: string;
+  username?: string;
   address: string;
   amount: string;
   isCurrentUser?: boolean;

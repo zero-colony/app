@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
-import { formatEther } from "viem";
+import { formatEther, zeroAddress } from "viem";
 import { useAccount, useBalance, useReadContract } from "wagmi";
 import { NETWORK_DATA } from "../constants/network-data";
 import { CLNY_CONTRACT, GAME_MANAGER_CONTRACT, MC_CONTRACT } from "./contracts";
@@ -312,4 +312,40 @@ export const useCollectAll = () => {
   };
 
   return { claimEarned, isClaimingEarned };
+};
+
+type LeaderboardResponse = {
+  top100: {
+    address: string;
+    amount: number;
+    updatedAt: string;
+  }[];
+  place: number;
+};
+
+export const useLeaderboard = () => {
+  const { address } = useAccount();
+
+  const { data: leaderboard, isLoading: isLeaderboardLoading } =
+    useQuery<LeaderboardResponse>({
+      queryKey: ["leaderboard", address],
+      queryFn: async () => {
+        const requestAddress = (address as string) ?? zeroAddress;
+
+        const rawResponse = await fetch(
+          `${NETWORK_DATA.LAND_META_SERVER}leaderboard/${requestAddress}`,
+          {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          },
+        );
+
+        return rawResponse.json();
+      },
+    });
+
+  return { leaderboard, isLeaderboardLoading };
 };
