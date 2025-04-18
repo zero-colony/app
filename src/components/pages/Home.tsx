@@ -1,22 +1,22 @@
 import { Stats } from "~/components/Stats";
 import { usePagination } from "~/lib/hooks/usePagination";
-import { useLandsDetailsPaginate, useMyLands } from "~/lib/web3/hooks";
-import LandComponent from "../LandComponent";
+import { useLandsDetails, useMyLands } from "~/lib/web3/hooks";
+import Land from "../Land";
 import { Pagination } from "../Pagination";
 import PrizePool from "../PrizePool";
 import YourLandsHeader from "../YourLandsHeader";
 
 export default function Home() {
   const { myLands } = useMyLands();
+
   const { currentPage, paginatedItems, totalPages, isEmpty, handlePageChange } =
     usePagination({
       items: myLands,
       itemsPerPage: 10,
     });
 
-  const { landsDetails, isLoadingLandsDetails } = useLandsDetailsPaginate(
-    isEmpty ? [] : paginatedItems,
-  );
+  const tokens = isEmpty ? [] : paginatedItems;
+  const { landsDetails, isLoadingLandsDetails } = useLandsDetails(tokens);
 
   return (
     <div>
@@ -40,10 +40,10 @@ export default function Home() {
                   </div>
                 ) : (
                   paginatedItems.map((landId, index) => (
-                    <LandComponent
+                    <Land
                       key={landId}
                       landId={landId}
-                      landDetails={landsDetails ? landsDetails[index] : undefined}
+                      landDetails={landsDetails![index]}
                     />
                   ))
                 )}

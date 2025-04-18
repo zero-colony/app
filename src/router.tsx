@@ -4,6 +4,7 @@ import { routerWithQueryClient } from "@tanstack/react-router-with-query";
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import superjson from "superjson";
+import { hashFn } from "wagmi/query";
 import { DefaultCatchBoundary } from "./components/DefaultCatchBoundary";
 import { NotFound } from "./components/NotFound";
 import { routeTree } from "./routeTree.gen";
@@ -26,6 +27,10 @@ function getUrl() {
 export function createRouter() {
   const queryClient = new QueryClient({
     defaultOptions: {
+      queries: {
+        // fixes "cannot serialize bigint" — https://github.com/TanStack/query/issues/3082
+        queryKeyHashFn: hashFn,
+      },
       dehydrate: { serializeData: superjson.serialize },
       hydrate: { deserializeData: superjson.deserialize },
     },

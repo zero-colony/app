@@ -18,12 +18,12 @@ interface LandDetails {
   powerProduction: number;
 }
 
-interface LandComponentProps {
+interface LandProps {
   landId: string;
   landDetails: LandDetails;
 }
 
-const LandComponent: React.FC<LandComponentProps> = ({ landId, landDetails }) => {
+const Land: React.FC<LandProps> = ({ landId, landDetails }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpand = () => {
@@ -140,4 +140,4 @@ const LandComponent: React.FC<LandComponentProps> = ({ landId, landDetails }) =>
   );
 };
 
-export default LandComponent;
+export default Land;

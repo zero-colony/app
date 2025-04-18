@@ -20,7 +20,11 @@ const Building: React.FC<BuildingProps> = (props: BuildingProps) => {
     landId,
   } = props;
 
-  const { upgrade, isLoading } = useUpgradeBuilding(landId, props, currentLevel);
+  const { upgrade, isLoading } = useUpgradeBuilding({
+    landId,
+    building: props,
+    currentLevel,
+  });
 
   const { clnyBalance } = useCLNYBalance();
   const isFullyBuilt = getIsFullyUpgraded(currentLevel);

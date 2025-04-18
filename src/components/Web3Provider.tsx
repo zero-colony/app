@@ -1,10 +1,7 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider } from "connectkit";
 import { zeroNetwork } from "viem/chains";
 import { WagmiProvider } from "wagmi";
 import { wagmiConfig, zeroTestnet } from "~/lib/web3/wagmi-config";
-
-const queryClient = new QueryClient();
 
 // zeroNetwork
 const connectKitOptions = {
@@ -15,11 +12,9 @@ const connectKitOptions = {
 export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
   return (
     <WagmiProvider config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        <ConnectKitProvider options={connectKitOptions} mode="dark">
-          {children}
-        </ConnectKitProvider>
-      </QueryClientProvider>
+      <ConnectKitProvider options={connectKitOptions} mode="dark">
+        {children}
+      </ConnectKitProvider>
     </WagmiProvider>
   );
 };

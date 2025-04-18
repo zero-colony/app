@@ -50,7 +50,7 @@ function RootComponent() {
         <Outlet />
       </Web3Provider>
 
-      <Toaster />
+      <Toaster theme="dark" />
     </RootDocument>
   );
 }

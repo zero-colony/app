@@ -52,8 +52,6 @@ export const MarsGlobe = ({
 
   const address = "";
 
-  console.log("rerendering");
-
   // Tooltip state
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [tooltipData, setTooltipData] = useState<{
