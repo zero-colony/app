@@ -4,1230 +4,1051 @@ export const GAME_MANAGER_ABI = [
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'receiver',
-        type: 'address',
+        internalType: "address",
+        name: "receiver",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
       },
     ],
-    name: 'Airdrop',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'owner',
-        type: 'address',
-      },
-    ],
-    name: 'BuildBaseStation',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'owner',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'uint8',
-        name: 'level',
-        type: 'uint8',
-      },
-    ],
-    name: 'BuildPowerProduction',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'owner',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'uint8',
-        name: 'level',
-        type: 'uint8',
-      },
-    ],
-    name: 'BuildRobotAssembly',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'owner',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'uint8',
-        name: 'level',
-        type: 'uint8',
-      },
-    ],
-    name: 'BuildTransport',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: 'uint8',
-        name: 'version',
-        type: 'uint8',
-      },
-    ],
-    name: 'Initialized',
-    type: 'event',
+    name: "Airdrop",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'uint256',
-        name: 'landId',
-        type: 'uint256',
+        internalType: "address",
+        name: "receiver",
+        type: "address",
+      },
+    ],
+    name: "AirdropColonist",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "landId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "avatarId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "win",
+        type: "bool",
+      },
+    ],
+    name: "AttackFinished",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
       },
       {
         indexed: true,
-        internalType: 'uint256',
-        name: 'avatarId',
-        type: 'uint256',
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+    ],
+    name: "BuildBaseStation",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
       },
       {
         indexed: true,
-        internalType: 'uint256',
-        name: 'rewardType',
-        type: 'uint256',
+        internalType: "address",
+        name: "owner",
+        type: "address",
       },
       {
         indexed: false,
-        internalType: 'uint256',
-        name: 'rewardAmount',
-        type: 'uint256',
+        internalType: "uint8",
+        name: "level",
+        type: "uint8",
       },
     ],
-    name: 'MissionReward',
-    type: 'event',
+    name: "BuildPowerProduction",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: false,
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint8",
+        name: "level",
+        type: "uint8",
       },
     ],
-    name: 'Paused',
-    type: 'event',
+    name: "BuildRobotAssembly",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: false,
-        internalType: 'uint256',
-        name: 'price',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint8",
+        name: "level",
+        type: "uint8",
       },
     ],
-    name: 'SetPrice',
-    type: 'event',
+    name: "BuildTransport",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: false,
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: "uint8",
+        name: "version",
+        type: "uint8",
       },
     ],
-    name: 'Unpaused',
-    type: 'event',
+    name: "Initialized",
+    type: "event",
   },
   {
+    anonymous: false,
     inputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        indexed: true,
+        internalType: "uint256",
+        name: "landId",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "avatarId",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "rewardType",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "rewardAmount",
+        type: "uint256",
       },
     ],
-    name: 'baseStationsPlacement',
-    outputs: [
+    name: "MissionReward",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
       {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'rotate',
-        type: 'uint32',
+        indexed: false,
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
+    name: "Paused",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "colonistAttackCooldown",
+        type: "uint256",
+      },
+    ],
+    name: "SetAttackCooldown",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "percentage",
+        type: "uint256",
+      },
+    ],
+    name: "SetAttackPricePercentage",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    name: "SetColonistPrice",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    name: "SetPrice",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "Unpaused",
+    type: "event",
   },
   {
     inputs: [],
-    name: 'clnyPerSecond',
+    name: "ATTACK_PRICE_PERCENTAGE",
     outputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'd',
+    name: "COLONIST_ATTACK_COOLDOWN",
     outputs: [
       {
-        internalType: 'contract IDependencies',
-        name: '',
-        type: 'address',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    name: 'landInfo',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: 'share',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'rewardDebt',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    name: 'landMissionEarnings',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    name: 'lootBoxesToMint',
-    outputs: [
-      {
-        internalType: 'uint64',
-        name: 'common',
-        type: 'uint64',
-      },
-      {
-        internalType: 'uint64',
-        name: 'rare',
-        type: 'uint64',
-      },
-      {
-        internalType: 'uint64',
-        name: 'legendary',
-        type: 'uint64',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'maxLandShares',
+    name: "COLONIST_PRICE",
     outputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "airdrop",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address",
+      },
+    ],
+    name: "airdropColonist",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "landId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "avatarId",
+        type: "uint256",
+      },
+    ],
+    name: "attackLand",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "baseStationsPlacement",
+    outputs: [
+      {
+        internalType: "uint32",
+        name: "x",
+        type: "uint32",
+      },
+      {
+        internalType: "uint32",
+        name: "y",
+        type: "uint32",
+      },
+      {
+        internalType: "uint32",
+        name: "rotate",
+        type: "uint32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "buildBaseStation",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint8",
+        name: "level",
+        type: "uint8",
+      },
+    ],
+    name: "buildPowerProduction",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint8",
+        name: "level",
+        type: "uint8",
+      },
+    ],
+    name: "buildRobotAssembly",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint8",
+        name: "level",
+        type: "uint8",
+      },
+    ],
+    name: "buildTransport",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'maxTokenId',
-    outputs: [
+    name: "buyColonist",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        internalType: "uint256[]",
+        name: "tokenIds",
+        type: "uint256[]",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
+    name: "claim",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256[]",
+        name: "tokenIds",
+        type: "uint256[]",
+      },
+    ],
+    name: "claimEarned",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'paused',
+    name: "d",
     outputs: [
       {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
+        internalType: "contract IDependencies",
+        name: "",
+        type: "address",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
+        internalType: "uint256[]",
+        name: "tokenIds",
+        type: "uint256[]",
       },
     ],
-    name: 'powerProductionPlacement',
-    outputs: [
-      {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'rotate',
-        type: 'uint32',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [],
-    name: 'price',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    name: 'referralsCount',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    name: 'referrerEarned',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    name: 'referrerSettings',
-    outputs: [
-      {
-        internalType: 'uint64',
-        name: 'discount',
-        type: 'uint64',
-      },
-      {
-        internalType: 'uint64',
-        name: 'reward',
-        type: 'uint64',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    name: 'referrers',
-    outputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    name: 'robotAssemblyPlacement',
-    outputs: [
-      {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'rotate',
-        type: 'uint32',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [],
-    name: 'totalShare',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    name: 'transportPlacement',
-    outputs: [
-      {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'rotate',
-        type: 'uint32',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [],
-    name: 'saleData',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: 'allowed',
-        type: 'bool',
-      },
-      {
-        internalType: 'uint256',
-        name: 'minted',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'limit',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [],
-    name: 'mintLootbox',
+    name: "fixEarnings",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'string',
-        name: 'message',
-        type: 'string',
-      },
-      {
-        internalType: 'uint8',
-        name: 'v',
-        type: 'uint8',
-      },
-      {
-        internalType: 'bytes32',
-        name: 'r',
-        type: 'bytes32',
-      },
-      {
-        internalType: 'bytes32',
-        name: 's',
-        type: 'bytes32',
+        internalType: "uint256[]",
+        name: "tokenIds",
+        type: "uint256[]",
       },
     ],
-    name: 'finishMission',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'contract IDependencies',
-        name: '_d',
-        type: 'address',
-      },
-    ],
-    name: 'initialize',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenCount',
-        type: 'uint256',
-      },
-    ],
-    name: 'getFee',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [],
-    name: 'mintAvatar',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256[]',
-        name: 'tokenIds',
-        type: 'uint256[]',
-      },
-    ],
-    name: 'claim',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
-    payable: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256[]',
-        name: 'tokenIds',
-        type: 'uint256[]',
-      },
-      {
-        internalType: 'address',
-        name: 'referrer',
-        type: 'address',
-      },
-    ],
-    name: 'claim',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
-    payable: true,
-  },
-  {
-    inputs: [],
-    name: 'pause',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'unpause',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'receiver',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-    ],
-    name: 'airdrop',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'landId',
-        type: 'uint256',
-      },
-    ],
-    name: 'getEarned',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-    ],
-    name: 'getEarningSpeed',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-    ],
-    name: 'buildBaseStation',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-    ],
-    name: 'buildAndPlaceBaseStation',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-      {
-        internalType: 'bool',
-        name: 'free',
-        type: 'bool',
-      },
-    ],
-    name: 'placeBaseStation',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint8',
-        name: 'level',
-        type: 'uint8',
-      },
-    ],
-    name: 'buildTransport',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-    ],
-    name: 'buildAndPlaceTransport',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-      {
-        internalType: 'bool',
-        name: 'free',
-        type: 'bool',
-      },
-    ],
-    name: 'placeTransport',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint8',
-        name: 'level',
-        type: 'uint8',
-      },
-    ],
-    name: 'buildRobotAssembly',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-    ],
-    name: 'buildAndPlaceRobotAssembly',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-      {
-        internalType: 'bool',
-        name: 'free',
-        type: 'bool',
-      },
-    ],
-    name: 'placeRobotAssembly',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint8',
-        name: 'level',
-        type: 'uint8',
-      },
-    ],
-    name: 'buildPowerProduction',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-    ],
-    name: 'buildAndPlacePowerProduction',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint32',
-        name: 'x',
-        type: 'uint32',
-      },
-      {
-        internalType: 'uint32',
-        name: 'y',
-        type: 'uint32',
-      },
-      {
-        internalType: 'bool',
-        name: 'free',
-        type: 'bool',
-      },
-    ],
-    name: 'placePowerProduction',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256[]',
-        name: 'tokenIds',
-        type: 'uint256[]',
-      },
-    ],
-    name: 'getEarningData',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256[]',
-        name: 'tokenIds',
-        type: 'uint256[]',
-      },
-    ],
-    name: 'getAttributesMany',
+    name: "getAttributesMany",
     outputs: [
       {
         components: [
           {
-            internalType: 'uint256',
-            name: 'speed',
-            type: 'uint256',
+            internalType: "uint256",
+            name: "speed",
+            type: "uint256",
           },
           {
-            internalType: 'uint256',
-            name: 'earned',
-            type: 'uint256',
+            internalType: "uint256",
+            name: "earned",
+            type: "uint256",
           },
           {
-            internalType: 'uint8',
-            name: 'baseStation',
-            type: 'uint8',
+            internalType: "uint8",
+            name: "baseStation",
+            type: "uint8",
           },
           {
-            internalType: 'uint8',
-            name: 'transport',
-            type: 'uint8',
+            internalType: "uint8",
+            name: "transport",
+            type: "uint8",
           },
           {
-            internalType: 'uint8',
-            name: 'robotAssembly',
-            type: 'uint8',
+            internalType: "uint8",
+            name: "robotAssembly",
+            type: "uint8",
           },
           {
-            internalType: 'uint8',
-            name: 'powerProduction',
-            type: 'uint8',
+            internalType: "uint8",
+            name: "powerProduction",
+            type: "uint8",
           },
         ],
-        internalType: 'struct IGameManager.AttributeData[]',
-        name: '',
-        type: 'tuple[]',
+        internalType: "struct IGameManager.AttributeData[]",
+        name: "",
+        type: "tuple[]",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'uint256[]',
-        name: 'tokenIds',
-        type: 'uint256[]',
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
       },
     ],
-    name: 'claimEarned',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    name: "getEarned",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: 'referrer',
-        type: 'address',
-      },
-      {
-        internalType: 'uint64',
-        name: 'discount',
-        type: 'uint64',
-      },
-      {
-        internalType: 'uint64',
-        name: 'reward',
-        type: 'uint64',
+        internalType: "uint256[]",
+        name: "tokenIds",
+        type: "uint256[]",
       },
     ],
-    name: 'setReferrerSettings',
+    name: "getEarningData",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "getEarningSpeed",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "tokenCount",
+        type: "uint256",
+      },
+    ],
+    name: "getFee",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "landId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "avatarId",
+        type: "uint256",
+      },
+    ],
+    name: "getWinAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "landId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "avatarId",
+        type: "uint256",
+      },
+    ],
+    name: "getWinChance",
+    outputs: [
+      {
+        internalType: "uint8",
+        name: "",
+        type: "uint8",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IDependencies",
+        name: "_d",
+        type: "address",
+      },
+    ],
+    name: "initialize",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "landLastAttackedTime",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "landMissionEarnings",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "lootBoxesToMint",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "common",
+        type: "uint64",
+      },
+      {
+        internalType: "uint64",
+        name: "rare",
+        type: "uint64",
+      },
+      {
+        internalType: "uint64",
+        name: "legendary",
+        type: "uint64",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'purchaseCryochamber',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    name: "maxTokenId",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
+        internalType: "address",
+        name: "_address",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
       },
     ],
-    name: 'purchaseCryochamberEnergy',
+    name: "mint",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "pause",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "paused",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'avatarId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'string',
-        name: '_name',
-        type: 'string',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    name: 'renameAvatar',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    name: "powerProductionPlacement",
+    outputs: [
+      {
+        internalType: "uint32",
+        name: "x",
+        type: "uint32",
+      },
+      {
+        internalType: "uint32",
+        name: "y",
+        type: "uint32",
+      },
+      {
+        internalType: "uint32",
+        name: "rotate",
+        type: "uint32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "price",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'uint16',
-        name: 'amount',
-        type: 'uint16',
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    name: 'repairTransport',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    name: "robotAssemblyPlacement",
+    outputs: [
+      {
+        internalType: "uint32",
+        name: "x",
+        type: "uint32",
+      },
+      {
+        internalType: "uint32",
+        name: "y",
+        type: "uint32",
+      },
+      {
+        internalType: "uint32",
+        name: "rotate",
+        type: "uint32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "saleData",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "allowed",
+        type: "bool",
+      },
+      {
+        internalType: "uint256",
+        name: "minted",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "limit",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'maxPrice',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "_colonistAttackCooldown",
+        type: "uint256",
       },
     ],
-    name: 'openLootbox',
+    name: "setAttackCooldown",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_percentage",
+        type: "uint256",
+      },
+    ],
+    name: "setAttackPricePercentage",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_price",
+        type: "uint256",
+      },
+    ],
+    name: "setColonistPrice",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IDependencies",
+        name: "addr",
+        type: "address",
+      },
+    ],
+    name: "setDependencies",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "setInitialValues",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_price",
+        type: "uint256",
+      },
+    ],
+    name: "setPrice",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "transportPlacement",
+    outputs: [
+      {
+        internalType: "uint32",
+        name: "x",
+        type: "uint32",
+      },
+      {
+        internalType: "uint32",
+        name: "y",
+        type: "uint32",
+      },
+      {
+        internalType: "uint32",
+        name: "rotate",
+        type: "uint32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "unpause",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_tokenContract",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_whereTo",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256",
+      },
+    ],
+    name: "withdrawToken",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ] as const;
